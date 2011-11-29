@@ -1,16 +1,21 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import java.util.List;
 
-import java.util.*;
-
-import models.*;
+import models.User;
+import play.mvc.Controller;
 
 public class Application extends Controller {
 
-    public static void index() {
-        render();
-    }
+	public static void index() {
+		List<User> users = User.findAll();
+		render(users);
+	}
+
+	public static void addUser() {
+		new User("", "", "JTE").save();
+
+		index();
+	}
 
 }

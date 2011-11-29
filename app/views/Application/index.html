@@ -1,4 +1,12 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title: 'Home' /}
 
-#{welcome /}
+Hello guys: 
+
+<ul>
+	#{list items:users, as:'user'}
+	<li>${user.fullname}</li>
+	#{/list}
+</ul>
+
+<a id="addUser" href="@{Application.addUser()}">Add user</a>
