@@ -14,12 +14,16 @@ public class Users extends Controller {
 	}
 
 	public static void addUser() {
-		new User("JTE", "").save();
+		new User("JTE").save();
 		Logger.info("Adding user");
 		displayUsers();
 	}
 
-	public static void displayUser(String email) {
+	public static void displayPickupPoints(String email) {
+		getUserAndRender(email);
+	}
+
+	private static void getUserAndRender(String email) {
 		List<User> users = User.find("byEmail", email).fetch();
 
 		if (users.size() == 1) {
@@ -30,6 +34,10 @@ public class Users extends Controller {
 			Logger.info("No user found");
 			// TODO handle error
 		}
+	}
+
+	public static void displayUser(String email) {
+		getUserAndRender(email);
 	}
 
 	public static void updateUser(Long id, User user) {

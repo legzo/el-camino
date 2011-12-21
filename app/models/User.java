@@ -1,6 +1,11 @@
 package models;
 
+import java.util.Collection;
+import java.util.HashSet;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import play.db.jpa.Model;
 
@@ -12,15 +17,21 @@ public class User extends Model {
 	public String firstName;
 	public String lastName;
 
-	public User(String email, String password) {
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	public Collection<PickupPoint> pickupPoints = new HashSet<PickupPoint>();
+
+	public User(String email) {
 		this.email = email;
-		this.password = password;
 	}
 
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+
+	public String getFullName() {
+		return String.format("%s %s", firstName, lastName);
 	}
 
 }

@@ -1,20 +1,27 @@
-# you describe your data using the YAML notation here
-# and then load them using Fixtures.load("data.yml")
-
-User(Terrier):
+User(terrier):
    email: legzo@gmail.com
    password: secret
    firstName: Julien
    lastName: Terrier
    
-User(Halfpenny):
+User(halfpenny):
    email: halfpen@gmail.com
    password: ccsecret
    firstName: Leigh
    lastName: Halfpenny
    
-User(Gorgodze):
+User(gorgodze):
    email: gorgodzilla@gmail.com
    password: ccdsecret
    firstName: Mamuka
    lastName: Gorgodze
+   
+PickupPoint(pp1terrier):
+   label: Mi casa
+   direction: to
+   owner: terrier
+   
+PickupPoint(pp2terrier):
+   label: L'école de mon fils
+   direction: to
+   owner: terrier

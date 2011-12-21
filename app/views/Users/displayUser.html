@@ -15,9 +15,14 @@
 
 	<label for="email">Email</label>
 	<input id="email" name="user.email" type="text" value="${user.email}">
-	
+	<br>
+
 	<button type="submit">Mettre à jour</button>
 	
 </form>
+<br/>
+
+<a href="@{Users.displayPickupPoints(user.email)}">(${user.pickupPoints.size()}) pickup points</a>
+<br>
 
 <a href="@{Users.displayUsers()}">- accueil</a>

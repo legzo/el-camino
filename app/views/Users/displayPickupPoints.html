@@ -1,0 +1,12 @@
+#{extends 'main.html' /}
+#{set title: 'User details' /}
+
+<h2>Les Pickup Points de ${user.fullName} (${user.pickupPoints.size()})</h2> 
+
+<ul>
+#{list items:user.pickupPoints, as:'pp'}
+	<li><a href="#">${pp.label} [${pp.direction}]</a></li>
+#{/list}
+</ul>
+
+<a href="@{Users.displayUsers()}">- accueil</a>

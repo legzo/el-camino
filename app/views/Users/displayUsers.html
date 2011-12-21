@@ -5,7 +5,7 @@ Salut tout le monde:
 
 <ul>
 	#{list items:users, as:'user'}
-		<li><a id="userDetails" href="@{Users.displayUser(user.email)}">${user.firstName} ${user.lastName}</a></li>
+		<li><a href="@{Users.displayUser(user.email)}">${user.firstName} ${user.lastName}</a></li>
 	#{/list}
 </ul>
 
