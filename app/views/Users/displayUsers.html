@@ -1,0 +1,14 @@
+#{extends 'main.html' /}
+#{set title: 'Home' /}
+
+Salut tout le monde: 
+
+<ul>
+	#{list items:users, as:'user'}
+		<li><a id="userDetails" href="@{Users.displayUser(user.email)}">${user.firstName} ${user.lastName}</a></li>
+	#{/list}
+</ul>
+
+<a id="addUser" href="@{Users.addUser()}">Ajouter un utilisateur</a>
+<br/>
+<a id="userDetails" href="@{Users.displayMyProfile()}">Mon profil</a>

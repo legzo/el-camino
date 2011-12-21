@@ -3,7 +3,11 @@
 # ~~~~
 
 # Home page
-GET     /                                       Application.index
+GET     /                                       Users.displayUsers
+GET     /users                                  Users.displayUsers
+GET     /user/{email}                          	Users.displayUser
+POST    /user                                  	Users.updateUser
+GET    /myProfile                             	Users.displayMyProfile
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

@@ -9,13 +9,18 @@ public class User extends Model {
 
 	public String email;
 	public String password;
-	public String fullname;
-	public boolean isAdmin;
+	public String firstName;
+	public String lastName;
 
-	public User(String email, String password, String fullname) {
+	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
-		this.fullname = fullname;
+	}
+
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", password=" + password
+				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 
 }
