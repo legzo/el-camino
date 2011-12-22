@@ -20,24 +20,26 @@ public class Users extends Controller {
 	}
 
 	public static void displayPickupPoints(String email) {
-		getUserAndRender(email);
+		User user = getUser(email);
+		render(user);
 	}
 
 	public static void displayUser(String email) {
-		getUserAndRender(email);
+		User user = getUser(email);
+		render(user);
 	}
 
-	private static void getUserAndRender(String email) {
+	public static User getUser(String email) {
 		List<User> users = User.find("byEmail", email).fetch();
-
+		User user = null;
 		if (users.size() == 1) {
-			User user = users.iterator().next();
+			user = users.iterator().next();
 			Logger.info("Displaying: %s", user);
-			render(user);
 		} else {
 			Logger.info("No user found");
 			// TODO handle error
 		}
+		return user;
 	}
 
 	public static void updateUser(Long id, User user) {
@@ -54,15 +56,21 @@ public class Users extends Controller {
 	}
 
 	public static void displayMyProfile() {
-		getUserAndRender(getConnectedUserLogin());
+		User user = getUser(getConnectedUserLogin());
+		render(user);
 	}
 
 	public static void displayMyPickupPoints() {
-		getUserAndRender(getConnectedUserLogin());
+		User user = getUser(getConnectedUserLogin());
+		render(user);
 	}
 
-	private static String getConnectedUserLogin() {
+	public static String getConnectedUserLogin() {
 		return "legzo@gmail.com";
+	}
+
+	public static User getConnectedUser() {
+		return getUser(getConnectedUserLogin());
 	}
 
 }

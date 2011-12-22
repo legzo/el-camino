@@ -8,6 +8,7 @@ GET     /users                                  Users.displayUsers
 GET     /user/{email}                          	Users.displayUser
 GET     /user/{email}/pp                       	Users.displayPickupPoints
 POST    /user                                  	Users.updateUser
+POST    /user/{email}/pp                        PickupPoints.addNew
 GET    	/me		                             	Users.displayMyProfile
 GET    	/me/pp	                             	Users.displayMyPickupPoints
 

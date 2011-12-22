@@ -9,4 +9,25 @@
 #{/list}
 </ul>
 
+<a id="addNewPP" href="#">Ajouter un pickup point</a>
+
+<form id="addPP" action="@{PickupPoints.addNew(user.email)}" method="POST">
+	<div>
+		<label for="label">Nom:</label>
+		<input id="label" type="text" name="newPP.label">
+	</div>
+</form>
+
+<br/>
+
 <a href="@{Users.displayUsers()}">- accueil</a>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#addNewPP').click(function() {
+			$('#addPP').fadeToggle();
+		});
+	});
+	
+	
+</script>
