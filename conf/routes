@@ -8,7 +8,8 @@ GET     /users                                  Users.displayUsers
 GET     /user/{email}                          	Users.displayUser
 GET     /user/{email}/pp                       	Users.displayPickupPoints
 POST    /user                                  	Users.updateUser
-GET    /myProfile                             	Users.displayMyProfile
+GET    	/me		                             	Users.displayMyProfile
+GET    	/me/pp	                             	Users.displayMyPickupPoints
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

@@ -23,6 +23,10 @@ public class Users extends Controller {
 		getUserAndRender(email);
 	}
 
+	public static void displayUser(String email) {
+		getUserAndRender(email);
+	}
+
 	private static void getUserAndRender(String email) {
 		List<User> users = User.find("byEmail", email).fetch();
 
@@ -34,10 +38,6 @@ public class Users extends Controller {
 			Logger.info("No user found");
 			// TODO handle error
 		}
-	}
-
-	public static void displayUser(String email) {
-		getUserAndRender(email);
 	}
 
 	public static void updateUser(Long id, User user) {
@@ -54,6 +54,15 @@ public class Users extends Controller {
 	}
 
 	public static void displayMyProfile() {
-		displayUser("legzo@gmail.com");
+		getUserAndRender(getConnectedUserLogin());
 	}
+
+	public static void displayMyPickupPoints() {
+		getUserAndRender(getConnectedUserLogin());
+	}
+
+	private static String getConnectedUserLogin() {
+		return "legzo@gmail.com";
+	}
+
 }

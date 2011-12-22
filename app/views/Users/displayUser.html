@@ -1,28 +1,6 @@
 #{extends 'main.html' /}
-#{set title: 'User details' /}
+#{set title: 'Informations de l\'utilisateur' /}
 
-<h2>Mes informations:</h2> 
+<h2>Informations de ${user.fullName}:</h2> 
 
-<form action="@{Users.updateUser(user.id)}" method="POST">
-
-	<label for="firstName">Prénom</label>
-	<input id="firstName" name="user.firstName" type="text" value="${user.firstName}">
-	<br>
-	
-	<label for="lastName">Nom</label>
-	<input id="lastName" name="user.lastName" type="text" value="${user.lastName}">
-	<br>
-
-	<label for="email">Email</label>
-	<input id="email" name="user.email" type="text" value="${user.email}">
-	<br>
-
-	<button type="submit">Mettre à jour</button>
-	
-</form>
-<br/>
-
-<a href="@{Users.displayPickupPoints(user.email)}">(${user.pickupPoints.size()}) pickup points</a>
-<br>
-
-<a href="@{Users.displayUsers()}">- accueil</a>
+ #{user user:user /}
