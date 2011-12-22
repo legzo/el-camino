@@ -1,6 +1,8 @@
 #{extends 'main.html' /}
 #{set title: 'Mes informations' /}
 
-<h2>Mes informations:</h2> 
+#{header pageTitle:'Mes informations' /}
 
- #{user user:user /}
+<div class="row">
+	#{user user:user /}
+</div>

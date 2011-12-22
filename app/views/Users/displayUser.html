@@ -1,6 +1,10 @@
 #{extends 'main.html' /}
 #{set title: 'Informations de l\'utilisateur' /}
 
-<h2>Informations de ${user.fullName}:</h2> 
+%{ title = 'Informations de ' + user.fullName }%
 
- #{user user:user /}
+#{header pageTitle:title /}
+
+<div class="row">
+	#{user user:user /}
+</div>

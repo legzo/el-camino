@@ -26,8 +26,8 @@ public class User extends Model {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", password=" + password
-				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "User [email=" + email + ", firstName=" + firstName
+				+ ", lastName=" + lastName + "]";
 	}
 
 	public String getFullName() {

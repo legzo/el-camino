@@ -1,13 +1,15 @@
 #{extends 'main.html' /}
 #{set title: 'Accueil' /}
 
-Salut tout le monde: 
+ #{header pageTitle:'Salut tout le monde' /}
 
-<ul>
-	#{list items:users, as:'user'}
-		<li><a href="@{Users.displayUser(user.email)}">${user.firstName} ${user.lastName}</a></li>
-	#{/list}
-</ul>
+<div class="row">
+	<ul>
+		#{list items:users, as:'user'}
+			<li><a href="@{Users.displayUser(user.email)}">${user.firstName} ${user.lastName}</a></li>
+		#{/list}
+	</ul>
+</div>
 
 <a id="addUser" href="@{Users.addUser()}">Ajouter un utilisateur</a>
 <br/>

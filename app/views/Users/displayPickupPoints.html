@@ -1,26 +1,9 @@
 #{extends 'main.html' /}
 #{set title: 'User details' /}
 
-<h2>Les Pickup Points de ${user.fullName} (${user.pickupPoints.size()})</h2> 
+%{ title = 'Les Pickup Points de ' + user.fullName }%
 
-<ul>
-#{list items:user.pickupPoints, as:'pp'}
-	<li><a href="#">${pp.label} [${pp.direction}]</a></li>
-#{/list}
-</ul>
-
-<a id="addNewPP" href="#">Ajouter un pickup point</a>
-
-<form id="addPP" action="@{PickupPoints.addNew(user.email)}" method="POST">
-	<div>
-		<label for="label">Nom:</label>
-		<input id="label" type="text" name="newPP.label">
-	</div>
-</form>
-
-<br/>
-
-<a href="@{Users.displayUsers()}">- accueil</a>
+#{header pageTitle:title /}
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -28,6 +11,26 @@
 			$('#addPP').fadeToggle();
 		});
 	});
-	
-	
 </script>
+
+<div class="row">
+	
+	<ul>
+	#{list items:user.pickupPoints, as:'pp'}
+		<li><a href="#">${pp.label} [${pp.direction}]</a></li>
+	#{/list}
+	</ul>
+	
+	<a id="addNewPP" href="#">Ajouter un pickup point</a>
+	
+	<form id="addPP" class="actions" action="@{PickupPoints.addNew(user.email)}" method="POST">
+		<h2>Entrez les infos du pickup point </h2>
+		
+		<div class="clearfix">
+			<label for="label">Nom:</label>
+			<div class="input">
+				<input id="label" type="text" name="newPP.label">
+			</div>
+		</div>
+	</form>
+</div>

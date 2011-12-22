@@ -2,24 +2,32 @@
 
 <form action="@{Users.updateUser(_user.id)}" method="POST">
 
-	<label for="firstName">Prénom</label>
-	<input id="firstName" name="user.firstName" type="text" value="${_user.firstName}">
-	<br>
+	<div class="clearfix">
+		<label for="firstName">Prénom</label>
+		<div class="input">
+			<input id="firstName" name="user.firstName" type="text" value="${_user.firstName}">
+		</div>
+	</div>
 	
-	<label for="lastName">Nom</label>
-	<input id="lastName" name="user.lastName" type="text" value="${_user.lastName}">
-	<br>
+	<div class="clearfix">
+		<label for="lastName">Nom</label>
+		<div class="input">
+			<input id="lastName" name="user.lastName" type="text" value="${_user.lastName}">
+		</div>
+	</div>
 
-	<label for="email">Email</label>
-	<input id="email" name="user.email" type="text" value="${_user.email}">
-	<br>
-
-	<button type="submit">Mettre à jour</button>
+	<div class="clearfix">
+		<label for="email">Email</label>
+		<div class="input">
+			<input id="email" name="user.email" type="text" value="${_user.email}">
+		</div>
+	</div>
+	
+	<div class="input">
+		<button class="btn" type="submit">Mettre à jour</button>
+	</div>
 	
 </form>
 <br/>
 
 <a href="@{Users.displayPickupPoints(_user.email)}">(${_user.pickupPoints.size()}) pickup points</a>
-<br>
-
-<a href="@{Users.displayUsers()}">- accueil</a>
