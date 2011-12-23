@@ -4,9 +4,16 @@ import java.util.List;
 
 import models.User;
 import play.Logger;
+import play.mvc.Before;
 import play.mvc.Controller;
 
 public class Users extends Controller {
+
+	@Before
+	public static void addConnectedUser() {
+		User connectedUser = getConnectedUser();
+		renderArgs.put("connectedUser", connectedUser);
+	}
 
 	public static void displayUsers() {
 		List<User> users = User.findAll();
@@ -37,7 +44,6 @@ public class Users extends Controller {
 			Logger.info("Displaying: %s", user);
 		} else {
 			Logger.info("No user found");
-			// TODO handle error
 		}
 		return user;
 	}
@@ -56,17 +62,33 @@ public class Users extends Controller {
 	}
 
 	public static void displayMyProfile() {
-		User user = getUser(getConnectedUserLogin());
+		User user = getConnectedUser();
+		if (user == null) {
+			displayUsers();
+		}
 		render(user);
 	}
 
 	public static void displayMyPickupPoints() {
-		User user = getUser(getConnectedUserLogin());
+		User user = getConnectedUser();
+		if (user == null) {
+			displayUsers();
+		}
 		render(user);
 	}
 
+	public static void login() {
+		session.put("connectedUser", "legzo@gmail.com");
+		displayMyProfile();
+	}
+
+	public static void logout() {
+		session.remove("connectedUser");
+		displayUsers();
+	}
+
 	public static String getConnectedUserLogin() {
-		return "legzo@gmail.com";
+		return session.get("connectedUser");
 	}
 
 	public static User getConnectedUser() {

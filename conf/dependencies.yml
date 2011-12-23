@@ -2,4 +2,4 @@
 
 require:
     - play
-    play -> less 0.3
+    - play -> less 0.3

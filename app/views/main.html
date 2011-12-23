@@ -17,6 +17,14 @@
 		<div class="fill">
 			<div class="container">
 				<a class="brand" href="/">Carpool</a>
+				<p>
+					#{if connectedUser == null}
+						<a href="@{Users.login()}">login</a>		
+					#{/if}
+					#{if connectedUser != null}
+						<a href="@{Users.displayMyProfile()}">${connectedUser.fullName}</a> - <a href="@{Users.logout()}">logout</a>		
+					#{/if}
+				</p>
 			</div>
 		</div>
 	</div>
