@@ -12,10 +12,11 @@ import play.db.jpa.Model;
 public class PickupPoint extends Model {
 
 	@Transient
-	private final static DecimalFormat distanceFormat = new DecimalFormat(
-			"#.##");
+	private final static DecimalFormat distanceFormat = new DecimalFormat("#.##");
 
 	public String label;
+
+	public String address;
 
 	public float latitude;
 	public float longitude;
@@ -44,10 +45,8 @@ public class PickupPoint extends Model {
 		double distance = -1f;
 
 		double theta = this.longitude - otherPP.longitude;
-		distance = Math.sin(Math.toRadians(this.latitude))
-				* Math.sin(Math.toRadians(otherPP.latitude))
-				+ Math.cos(Math.toRadians(this.latitude))
-				* Math.cos(Math.toRadians(otherPP.latitude))
+		distance = Math.sin(Math.toRadians(this.latitude)) * Math.sin(Math.toRadians(otherPP.latitude))
+				+ Math.cos(Math.toRadians(this.latitude)) * Math.cos(Math.toRadians(otherPP.latitude))
 				* Math.cos(Math.toRadians(theta));
 		distance = Math.acos(distance);
 		distance = Math.toDegrees(distance);

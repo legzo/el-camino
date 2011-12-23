@@ -21,9 +21,9 @@
 					#{if connectedUser == null}
 						<a href="@{Users.login()}">login</a>		
 					#{/if}
-					#{if connectedUser != null}
+					#{else}
 						<a href="@{Users.displayMyProfile()}">${connectedUser.fullName}</a> - <a href="@{Users.logout()}">logout</a>		
-					#{/if}
+					#{/else}
 				</p>
 			</div>
 		</div>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.User;
 import play.Logger;
+import play.data.validation.Required;
 import play.mvc.Before;
 import play.mvc.Controller;
 
@@ -63,6 +64,7 @@ public class Users extends Controller {
 
 	public static void displayMyProfile() {
 		User user = getConnectedUser();
+		Logger.info("Displaying profile for %s", user);
 		if (user == null) {
 			displayUsers();
 		}
@@ -77,9 +79,28 @@ public class Users extends Controller {
 		render(user);
 	}
 
+	public static void logUser(@Required String login, @Required String password) {
+
+		if (validation.hasErrors()) {
+			flash.error("Veuillez saisir un login et un mot de passe s'il vous plait");
+			login();
+		}
+
+		User foundUser = User.find("byEmailAndPassword", login, password).first();
+		if (foundUser == null) {
+			flash.error("Les informations saisies ne correspondent à aucun utilisateur...");
+		} else {
+			session.put("connectedUser", foundUser.email);
+		}
+		login();
+	}
+
 	public static void login() {
-		session.put("connectedUser", "legzo@gmail.com");
-		displayMyProfile();
+		if (session.get("connectedUser") != null) {
+			displayMyProfile();
+		} else {
+			render();
+		}
 	}
 
 	public static void logout() {
