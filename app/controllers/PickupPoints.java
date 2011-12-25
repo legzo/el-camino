@@ -9,9 +9,11 @@ public class PickupPoints extends Controller {
 	public static void addNew(String email, PickupPoint newPP) {
 		Logger.info("Adding PP %s for %s", newPP.label, email);
 
-		newPP.owner = Users.getUser(email);
+		Logger.info("Latitude %s, Longitude %s", newPP.latitude, newPP.longitude);
+
+		newPP.owner = Users.getConnectedUser();
 		newPP.save();
 
-		Users.displayPickupPoints(email);
+		Users.displayMyPickupPoints();
 	}
 }
