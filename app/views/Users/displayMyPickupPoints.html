@@ -39,10 +39,9 @@
 				
 				$('#latitude').val(place.geometry.location.Qa);
 				$('#longitude').val(place.geometry.location.Ra);
-
+				
 				marker.setPosition(place.geometry.location);
 			});
-
 	}
 
 	$(document).ready(function() {
@@ -52,8 +51,6 @@
 			$('#addPP').fadeToggle();
 			initialize();
 		});
-
-		
 	});
 </script>
 
@@ -62,7 +59,8 @@
 
 	<ul>
 		#{list items:user.pickupPoints, as:'pp'}
-		<li><a href="#">${pp.label} [${pp.direction}]</a></li> #{/list}
+		<li><a href="#">${pp.label} [${pp.direction}  ${pp.address} <small>${pp.latitude}, ${pp.longitude}]</small></a></li> 
+		#{/list}
 	</ul>
 
 	<a id="addNewPP" href="#">Ajouter un pickup point</a>

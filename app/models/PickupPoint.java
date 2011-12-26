@@ -2,6 +2,7 @@ package models;
 
 import java.text.DecimalFormat;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
@@ -20,6 +21,9 @@ public class PickupPoint extends Model {
 
 	public float latitude;
 	public float longitude;
+
+	@Embedded
+	public Instant time;
 
 	public Direction direction;
 

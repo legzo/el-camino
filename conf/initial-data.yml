@@ -3,6 +3,9 @@ User(terrier):
    password: secret
    firstName: Julien
    lastName: Terrier
+   address: 8 allée du Clos Lafitte, 33370 Fargues St Hilaire
+   carModel: Citroën C4
+   availableSeats: 3
    
 User(halfpenny):
    email: halfpen@gmail.com
@@ -20,8 +23,15 @@ PickupPoint(pp1terrier):
    label: Mi casa
    direction: to
    owner: terrier
+   address: 8 allée du clos Lafitte
+   time:
+      hour: 12
+      minute: 20
    
 PickupPoint(pp2terrier):
    label: L'école de mon fils
    direction: to
    owner: terrier
+   time:
+      hour: 09
+      minute: 30

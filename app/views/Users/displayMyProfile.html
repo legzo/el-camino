@@ -1,8 +1,24 @@
 #{extends 'main.html' /}
-#{set title: 'Mes informations' /}
+#{set title: 'Mon profil' /}
 
-#{header pageTitle:'Mes informations' /}
+#{header pageTitle:'Mon profil' /}
 
 <div class="row">
-	#{user user:user /}
+	<h2>Mes informations <small><a href="#">modifier</a></small></h2>
+	<p>
+		Je m'appelle <em>${user.fullName}</em> et suis joignable via l'email <em>${user.email}</em>.
+	</p>
+	<p>
+		J'habite : <em>${user.address}</em> et conduis une <em>${user.carModel} (${user.availableSeats} places)</em>.
+	</p>
+	
+	<h2>Mes habitudes <small><a href="#">modifier</a></small></h2>
+	<p>
+		#{if toPP != null && fromPP != null} 
+		Je quitte mon domicile aux alentours de <em>${toPP.time}</em> et reprends mon véhicule vers <em>${fromPP.time}</em>.
+		#{/if}
+		#{else}
+		Je n'ai pas encore renseigné mes habitudes... <a href="#">Qu'attends-je donc?</a>
+		#{/else}
+	</p>
 </div>

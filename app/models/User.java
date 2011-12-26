@@ -16,6 +16,9 @@ public class User extends Model {
 	public String password;
 	public String firstName;
 	public String lastName;
+	public String address;
+	public String carModel = "voiture non identifiée";
+	public int availableSeats = 0;
 
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	public Collection<PickupPoint> pickupPoints = new HashSet<PickupPoint>();
@@ -26,8 +29,7 @@ public class User extends Model {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", firstName=" + firstName
-				+ ", lastName=" + lastName + "]";
+		return "User [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 
 	public String getFullName() {
