@@ -1,33 +1,139 @@
 *{ Displays a user }*
 
+<script
+	src="//maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+	type="text/javascript"></script>
+
+<script type="text/javascript">
+	var map, geocoder, marker;
+
+	function initialize() {
+		geocoder = new google.maps.Geocoder();
+
+		var mapOptions = {
+			center : new google.maps.LatLng(44.77674, -0.6526569999999765),
+			zoom : 9,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById('map_canvas'),
+				mapOptions);
+
+		var input = document.getElementById('address');
+		var autocomplete = new google.maps.places.Autocomplete(input);
+
+		autocomplete.bindTo('bounds', map);
+
+		google.maps.event.addListener(autocomplete, 'place_changed',
+				function() {
+					var place = autocomplete.getPlace();
+					updateMap(place);
+				});
+
+		google.maps.event.addDomListener(input, 'keydown', function(e) {
+			if (e.keyCode == 13) {
+				if (e.preventDefault) {
+					e.preventDefault();
+				}
+			}
+		});
+	}
+
+	function codeAddress() {
+		var address = document.getElementById("address").value;
+		geocoder.geocode({
+			'address' : address
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				updateMap(results[0]);
+			} else {
+				alert("Geocode was not successful for the following reason: "
+						+ status);
+			}
+		});
+	}
+
+	function updateMap(place) {
+		if(marker){
+			marker.setMap(null);
+		}
+		
+		marker = new google.maps.Marker({
+			map : map
+		});
+
+		if (place.geometry.viewport) {
+			map.fitBounds(place.geometry.viewport);
+		} else {
+			map.setCenter(place.geometry.location);
+			map.setZoom(15); // Why 17? Because it looks good.
+		}
+
+		marker.setPosition(place.geometry.location);
+		
+		$('#latitude').val(place.geometry.location.Qa);
+		$('#longitude').val(place.geometry.location.Ra);
+	}
+
+	$(document).ready(function() {
+		initialize();
+		codeAddress();
+	});
+</script>
+
 <form action="@{Users.updateUser(_user.id)}" method="POST">
 
 	<div class="clearfix">
-		<label for="firstName">prénom</label>
+		<label for="firstName">nom et prénom</label>
 		<div class="input">
-			<input id="firstName" name="user.firstName" type="text" value="${_user.firstName}">
-		</div>
-	</div>
-	
-	<div class="clearfix">
-		<label for="lastName">nom</label>
-		<div class="input">
-			<input id="lastName" name="user.lastName" type="text" value="${_user.lastName}">
+			<input id="firstName" name="user.firstName" type="text"	value="${_user.firstName}" class="span3"> 
+			<input id="lastName" name="user.lastName" type="text" value="${_user.lastName}" class="span3">
 		</div>
 	</div>
 
 	<div class="clearfix">
 		<label for="email">email</label>
 		<div class="input">
-			<input id="email" name="user.email" type="text" value="${_user.email}">
+			<div class="input-prepend">
+				<span class="add-on">@</span> <input id="email" name="user.email" type="text" value="${_user.email}">
+			</div>
 		</div>
 	</div>
-	 
-	<div class="input">
-		<button class="btn" type="submit">mettre à jour</button>
+
+	<div class="clearfix">
+		<label for="address">adresse</label>
+		<div class="input">
+			<input id="address" name="user.address.formattedAddress" type="text" value="${_user.address.formattedAddress}" class="span7">
+			<div id="map_canvas"></div>
+		</div>
+	</div>
+
+	<div class="clearfix">
+		<label for="carModel">véhicule</label>
+		<div class="input">
+			<input id="carModel" name="user.carModel" type="text" value="${_user.carModel}"> 
+			<input class="xsmall" id="availableSeats" name="user.availableSeats" type="text" value="${_user.availableSeats}">
+			places disponibles
+			<span class="help-block">ex: Citroën C4 - 3 places disponibles</span>
+		</div>
+	</div>
+
+	<div class="clearfix">
+		<label for="schedule">habitudes</label>
+		<div class="input">
+			je pars vers 
+			<input id="toTimeHour" name="user.toTime.hour" type="text" value="${_user.toTime.hour.format('00')}" class="xsmall">
+			h <input id="toTimeMinute" name="user.toTime.minute" type="text" value="${_user.toTime.minute.format('00')}" class="xsmall">
+			et quitte FT vers
+			<input id="fromTimeHour" name="user.fromTime.hour" type="text" value="${_user.fromTime.hour.format('00')}" class="xsmall">
+			h <input id="fromTimeMinute" name="user.fromTime.minute" type="text" value="${_user.fromTime.minute.format('00')}" class="xsmall">
+		</div>
 	</div>
 	
-</form>
-<br/>
+	<input id="latitude" name="user.address.latitude" value="${_user.address.latitude}" type="hidden">
+	<input id="longitude" name="user.address.longitude" value="${_user.address.latitude}" type="hidden">
 
-<a href="@{Users.displayPickupPoints(_user.email)}">(${_user.pickupPoints.size()}) pickup points</a>
+	<div class="input">
+		<button class="btn primary" type="submit">mettre à jour</button>
+	</div>
+
+</form>

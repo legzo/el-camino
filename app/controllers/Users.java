@@ -1,7 +1,10 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import models.Peer;
 import models.User;
 import play.Logger;
 import play.data.validation.Required;
@@ -25,11 +28,6 @@ public class Users extends Controller {
 		new User("JTE").save();
 		Logger.info("Adding user");
 		displayUsers();
-	}
-
-	public static void displayPickupPoints(String email) {
-		User user = getUser(email);
-		render(user);
 	}
 
 	public static void displayUser(String email) {
@@ -57,6 +55,15 @@ public class Users extends Controller {
 		userToUpdate.email = user.email;
 		userToUpdate.firstName = user.firstName;
 		userToUpdate.lastName = user.lastName;
+		userToUpdate.carModel = user.carModel;
+		userToUpdate.availableSeats = user.availableSeats;
+		userToUpdate.toTime = user.toTime;
+		userToUpdate.fromTime = user.fromTime;
+
+		// update address
+		userToUpdate.address.formattedAddress = user.address.formattedAddress;
+		userToUpdate.address.latitude = user.address.latitude;
+		userToUpdate.address.longitude = user.address.longitude;
 
 		userToUpdate.save();
 		displayUsers();
@@ -68,11 +75,28 @@ public class Users extends Controller {
 		if (user == null) {
 			displayUsers();
 		}
-		render(user);
+
+		List<User> users = User.all().fetch();
+		List<Peer> peers = new ArrayList<Peer>();
+
+		for (User u : users) {
+			if (!u.email.equals(user.email)) {
+				Peer peer = new Peer();
+				peer.user = u;
+				peer.distance = user.address.distanceTo(u.address);
+
+				peers.add(peer);
+			}
+		}
+
+		Collections.sort(peers);
+
+		render(user, peers);
 	}
 
-	public static void displayMyPickupPoints() {
+	public static void editMyProfile() {
 		User user = getConnectedUser();
+		Logger.info("Editing profile for %s", user);
 		if (user == null) {
 			displayUsers();
 		}

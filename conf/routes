@@ -6,11 +6,9 @@
 GET     /                                       Users.displayUsers
 GET     /users                                  Users.displayUsers
 GET     /user/{email}                          	Users.displayUser
-GET     /user/{email}/pp                       	Users.displayPickupPoints
-POST    /user                                  	Users.updateUser
-POST    /user/{email}/pp                        PickupPoints.addNew
+POST    /user/{email}  							Users.updateUser
 GET    	/me		                             	Users.displayMyProfile
-GET    	/me/pp	                             	Users.displayMyPickupPoints
+GET 	/me/edit								Users.editMyProfile
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

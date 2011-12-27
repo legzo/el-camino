@@ -3,35 +3,45 @@ User(terrier):
    password: secret
    firstName: Julien
    lastName: Terrier
-   address: 8 allée du Clos Lafitte, 33370 Fargues St Hilaire
+   address:
+      formattedAddress: 8 allée du Clos Lafitte, 33370 Fargues St Hilaire
    carModel: Citroën C4
    availableSeats: 3
+   toTime:
+      hour: 09
+      minute: 20
+   fromTime:
+      hour: 18
+      minute: 40
    
 User(halfpenny):
    email: halfpen@gmail.com
-   password: ccsecret
+   password: secret
    firstName: Leigh
    lastName: Halfpenny
+   address:
+      formattedAddress: 33 rue Surson, 33000 Bordeaux
+   carModel: Peugeot 307
+   availableSeats: 2
+   toTime:
+      hour: 09
+      minute: 00
+   fromTime:
+      hour: 18
+      minute: 00
    
 User(gorgodze):
    email: gorgodzilla@gmail.com
-   password: ccdsecret
+   password: secret
    firstName: Mamuka
    lastName: Gorgodze
-   
-PickupPoint(pp1terrier):
-   label: Mi casa
-   direction: to
-   owner: terrier
-   address: 8 allée du clos Lafitte
-   time:
-      hour: 12
-      minute: 20
-   
-PickupPoint(pp2terrier):
-   label: L'école de mon fils
-   direction: to
-   owner: terrier
-   time:
-      hour: 09
+   address:
+      formattedAddress: 20 rue de bègles, 33800 Bordeaux
+   carModel: Fiat Panda
+   availableSeats: 1
+   toTime:
+      hour: 08
       minute: 30
+   fromTime:
+      hour: 18
+      minute: 10

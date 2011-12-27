@@ -1,6 +1,4 @@
-import models.Direction;
-import models.PickupPoint;
-import models.User;
+import models.Address;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,30 +14,9 @@ public class UserTest extends UnitTest {
 	}
 
 	@Test
-	public void shouldSavePickupPointsUserRelationCorrectly() {
-		User user = new User("Test").save();
-
-		new PickupPoint(user, "Mi casa", Direction.to).save();
-
-		assertEquals(1, User.count());
-		assertEquals(1, PickupPoint.count());
-
-		PickupPoint pp = new PickupPoint(user, "L'école de mon fils",
-				Direction.to);
-		pp.save();
-
-		assertEquals(2, user.pickupPoints.size());
-	}
-
-	@Test
-	public void shouldNotFailToCreatePPWithoutOwner() {
-		new PickupPoint("test", Direction.from);
-	}
-
-	@Test
 	public void shouldCalculateNullDistancesBetweenPPWhenNoCoords() {
-		PickupPoint bordeaux = new PickupPoint("Bordeaux", Direction.to);
-		PickupPoint fargues = new PickupPoint("Fargues", Direction.to);
+		Address bordeaux = new Address("Bordeaux");
+		Address fargues = new Address("Fargues");
 
 		double distanceTo = bordeaux.distanceTo(fargues);
 
@@ -48,9 +25,9 @@ public class UserTest extends UnitTest {
 
 	@Test
 	public void shouldCalculateDistancesBetweenPP() {
-		PickupPoint bordeaux = new PickupPoint("Bordeaux", Direction.to);
-		PickupPoint fargues = new PickupPoint("Fargues", Direction.to);
-		PickupPoint taff = new PickupPoint("Pessac", Direction.to);
+		Address bordeaux = new Address("Bordeaux");
+		Address fargues = new Address("Fargues");
+		Address taff = new Address("Pessac");
 
 		bordeaux.latitude = 44.843899f;
 		bordeaux.longitude = -0.5641846999999416f;
@@ -70,8 +47,8 @@ public class UserTest extends UnitTest {
 
 	@Test
 	public void shouldCalculateDistancesBetweenPPAsString() {
-		PickupPoint bordeaux = new PickupPoint("Bordeaux", Direction.to);
-		PickupPoint fargues = new PickupPoint("Fargues", Direction.to);
+		Address bordeaux = new Address("Bordeaux");
+		Address fargues = new Address("Fargues");
 
 		bordeaux.latitude = 44.843899f;
 		bordeaux.longitude = -0.5641846999999416f;

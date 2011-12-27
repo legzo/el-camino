@@ -4,21 +4,23 @@
 #{header pageTitle:'Mon profil' /}
 
 <div class="row">
-	<h2>Mes informations <small><a href="#">modifier</a></small></h2>
+	<h3>Mes informations <small><a href="@{Users.editMyProfile()}">modifier</a></small></h3>
 	<p>
 		Je m'appelle <em>${user.fullName}</em> et suis joignable via l'email <em>${user.email}</em>.
 	</p>
 	<p>
-		J'habite : <em>${user.address}</em> et conduis une <em>${user.carModel} (${user.availableSeats} places)</em>.
+		J'habite <em>${user.address.formattedAddress}</em> et conduis une <em>${user.carModel} (${user.availableSeats} places)</em>.
+	</p>
+	<p>
+		Je quitte mon domicile aux alentours de <em>${user.toTime}</em> et reprends mon véhicule vers <em>${user.fromTime}</em>.
 	</p>
 	
-	<h2>Mes habitudes <small><a href="#">modifier</a></small></h2>
-	<p>
-		#{if toPP != null && fromPP != null} 
-		Je quitte mon domicile aux alentours de <em>${toPP.time}</em> et reprends mon véhicule vers <em>${fromPP.time}</em>.
-		#{/if}
-		#{else}
-		Je n'ai pas encore renseigné mes habitudes... <a href="#">Qu'attends-je donc?</a>
-		#{/else}
-	</p>
+	<h3>Près de moi... <small>des possibles carpooleurs</small></h3>
+	
+	<ul>
+		#{list items:peers, as:'peer'}
+			<li><a href="@{Users.displayUser(peer.user.email)}">${peer.distance.format('##.0')} kms - ${peer.user.fullName}</a></li>
+		#{/list}
+	</ul>
+	
 </div>

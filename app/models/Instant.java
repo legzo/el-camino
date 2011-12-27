@@ -16,6 +16,9 @@ public class Instant {
 	@Max(value = 60)
 	public int minute;
 
+	public Instant() {
+	}
+
 	public Instant(int hour, int minute) {
 		super();
 		this.hour = hour;
